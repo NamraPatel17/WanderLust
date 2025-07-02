@@ -20,14 +20,30 @@ async function main() {
 const initDB = async () => {
   try {
     await Listing.deleteMany({});
-    const updatedData = initData.data.map((obj) => ({
-      ...obj,
-      owner: "66567b03fda820235197b582",
+    
+    // Transform the data to match MongoDB schema
+    const transformedData = initData.data.map((listing) => ({
+      title: listing.title,
+      description: listing.description,
+      image: {
+        filename: listing.image.filename,
+        url: listing.image.url
+      },
+      price: listing.price,
+      location: listing.location,
+      country: listing.country,
+      reviews: listing.reviews.map(review => review.$oid), // Convert $oid to string
+      owner: listing.owner.$oid, // Convert $oid to string
+      category: listing.category
     }));
-    await Listing.insertMany(updatedData);
-    console.log("DB is initialized");
+    
+    await Listing.insertMany(transformedData);
+    console.log("Database seeded successfully with", transformedData.length, "listings");
   } catch (error) {
     console.error("Error initializing DB:", error);
+  } finally {
+    await mongoose.connection.close();
+    console.log("Database connection closed");
   }
 };
 
