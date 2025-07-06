@@ -13,7 +13,7 @@
                     <div class="listing-card-body mt-3">
                         <p class="listing-card-text">
                             <b>Hosted By: </b><i>
-                                <%= listing.owner.username %>
+                                <%= listing.owner && listing.owner.username ? listing.owner.username : "Unknown" %>
                             </i>
                         </p>
                         <p class="listing-card-text">
@@ -43,7 +43,7 @@
                         <button class="btn btn-success reserve-btn">Reserve</button>
                     </form>
                 </div>
-                <% if(currUser && currUser._id.equals(listing.owner._id)){ %>
+                <% if(currUser && listing.owner && currUser._id.equals(listing.owner._id)){ %>
                     <div class="show-btns d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3">
                         <a href="/listings/<%= listing._id %>/edit" class="btn btn-danger mb-2 mb-md-0">Edit this
                             Listing</a>
