@@ -24,13 +24,13 @@
                         <i class="fa-solid fa-circle-user"></i>&nbsp;&nbsp;&nbsp;
                     </button>
                     <ul class="dropdown-menu">
-                        <% if(typeof currUser === 'undefined' || !currUser) { %>
+                        <% if(!currUser) { %>
                             <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i>&nbsp; &nbsp;<b>Sign
                                     up</b></a>
                             <a class="nav-link" href="/login"><b><i class="fa-solid fa-user-check"></i>&nbsp; &nbsp;Log
                                     in</b></a>
                             <% } %>
-                                <% if(typeof currUser !== 'undefined' && currUser) { %>
+                                <% if(currUser) { %>
                                     <h6 class="mt-1 nav-link"><b><i class="fa-solid fa-user"></i>
                                             &nbsp; &nbsp;<%= currUser.username%>
                                         </b></h6>
@@ -45,13 +45,13 @@
                     </ul>
                 </div>
                 <div id="responsive-registration">
-                    <% if(typeof currUser === 'undefined' || !currUser) { %>
+                    <% if(!currUser) { %>
                         <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;<b>Sign
                                 up</b></a>
                         <a class="nav-link" href="/login"><i class="fa-solid fa-user-check"></i>&nbsp;&nbsp;<b>Log
                                 in</b></a>
                         <% } %>
-                            <% if(typeof currUser !== 'undefined' && currUser) { %>
+                            <% if(currUser) { %>
                                 <h6 class="mt-1 nav-link"><b><i class="fa-solid fa-user"></i>
                                         &nbsp; &nbsp;<%= currUser.username%>
                                     </b></h6>
